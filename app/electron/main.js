@@ -103,14 +103,11 @@ async function createWindow() {
   });
 
   // Load app
-  if (isDev) {
-    win.loadURL(selfHost);
-  } else {
-    win.loadURL(`${Protocol.scheme}://rse/index.html`);
-  }
+  win.loadURL(selfHost);
+
 
   win.webContents.on("did-finish-load", () => {
-    win.setTitle(`Getting started with secure-electron-template (v${app.getVersion()})`);
+    win.setTitle(`Echolang`);
   });
 
   // Only do these things when in development

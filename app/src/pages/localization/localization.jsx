@@ -1,6 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import "./localization.css";
+import "./localization.css"; 
 
 class Localization extends React.Component {
   render() {

@@ -194,7 +194,7 @@ class Nav extends React.Component {
           <div className="navbar-start">
             <a
               className="navbar-item"
-              onClick={() => this.navigate(ROUTES.WELCOME)}>
+              onClick={() => this.navigate(ROUTES.HOME)}>
               Home
             </a>
 

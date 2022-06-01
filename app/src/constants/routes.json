@@ -1,5 +1,8 @@
 {
-  "WELCOME": "/",
+  
+  "HOME": "/",
+  "TEXTTRANSLATE": "/texttranslate",
+  "AUDIOTRANSLATE": "/audiotranslate",
   "ABOUT": "/about",
   "MOTD": "/motd",
   "LOCALIZATION": "/localization",

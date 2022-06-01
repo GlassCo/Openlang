@@ -4,8 +4,14 @@ import ROUTES from "Constants/routes";
 import loadable from "@loadable/component";
 
 // Load bundles asynchronously so that the initial render happens faster
-const Welcome = loadable(() =>
-  import(/* webpackChunkName: "WelcomeChunk" */ "Pages/welcome/welcome")
+const Home = loadable(() =>
+  import(/* webpackChunkName: "HomeChunk" */ "Pages/home/home")
+);
+const Texttranslate = loadable(() =>
+  import(/* webpackChunkName: "TexttranslateChunk" */ "Pages/texttranslate/texttranslate")
+);
+const Audiotranslate = loadable(() =>
+  import(/* webpackChunkName: "AudiotranslateChunk" */ "Pages/audiotranslate/audiotranslate")
 );
 const About = loadable(() =>
   import(/* webpackChunkName: "AboutChunk" */ "Pages/about/about")
@@ -29,7 +35,10 @@ class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path={ROUTES.WELCOME} component={Welcome}></Route>
+        <Route exact path={ROUTES.HOME} component={Home}></Route>
+        <Route path={ROUTES.TEXTTRANSLATE} component={Texttranslate}></Route>
+        <Route path={ROUTES.AUDIOTRANSLATE} component={Audiotranslate}></Route>
+
         <Route path={ROUTES.ABOUT} component={About}></Route>
         <Route path={ROUTES.MOTD} component={Motd}></Route>
         <Route path={ROUTES.LOCALIZATION} component={Localization}></Route>
