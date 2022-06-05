@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Openlang - Text Translation</title>
+    <meta name="description">
+    <link rel="stylesheet" href="../CSS/bulma.css">
+    <script type="text/javascipt" src="eel.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded, LoadCourse")
+      function LoadCourse() {
+        document.getElementById("lessons").innerText = `${eel.getCourses()}`;
+      }
+    </script>
+    
+  </head>
+
+  <section class="hero is-dark is-fullheight is-clipped">
+    <div class="hero-body columns is-centered">
+      <div class="column has-text-centered is-narrow is-vcentered">
+        <div class="box has-background-light p-6">
+          <h1 class="title has-text-dark">- <span class="is-underlined" id="course-name"></span> -</h1>
+          <div id="lessons">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</html>
