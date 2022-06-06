@@ -1,6 +1,3 @@
-import * as filterGen from "./filtergenerator.mjs"
-import { getCourses } from "../../Courses/Courses.py"
-
 //  Elements
 var lessons = document.getElementById("lessons");
 
@@ -8,7 +5,11 @@ var lessons = document.getElementById("lessons");
 document.addEventListener("DOMContentLoaded", LoadCourse);
 
 //  Functions
-function LoadCourse() {
+function loadCourse() {
     lessons.innerHTML = "test"
-    lessons.innerHTML = `${getCourses()}`
+    lessons.innerHTML = getCourses()
 }
+
+function getCourses()
+
+console.log(LoadCourse())
