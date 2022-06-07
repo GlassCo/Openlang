@@ -90,7 +90,7 @@ Speech-to-Text API: ${COURSE.SETTINGS.API.STT}
 /-/-/-/-/-/-/-/-/-/
 `)
 
-for (i=0; i<=COURSE.LESSONS.length; i++) {
+for (i=0; i<COURSE.LESSONS.length; i++) {
     console.log(`
     -LESSON ${i}-
     Lesson Title: ${COURSE.LESSONS[i].TITLE}
@@ -101,7 +101,7 @@ for (i=0; i<=COURSE.LESSONS.length; i++) {
     -NATIVE SENTENCES-
     `)
 
-    for (j=0; j<=COURSE.LESSONS[i].MEDIA.NATIVESENTENCES; j++) {
+    for (j=0; j<COURSE.LESSONS[i].MEDIA.NATIVESENTENCES; j++) {
         console.log(`
         -LESSON ${i}-
         Lesson Title: ${COURSE.LESSONS[i].TITLE}
