@@ -10,9 +10,8 @@
     <div class="hero-body columns is-centered">
       <div class="column has-text-centered is-two-thirds is-narrow is-vcentered">
         <div class="box has-background-light px-5 py-5 m-0">
-          <h1 class="title has-text-dark m-0">- <span class="is-underlined">Text Translation</span> -</h1>
-          <p class="prompt">Translate the following:</p>
-          <p class="label" id="input">Hallo! Ich bin Melanie!</p>
+          <h1 class="subtitle has-text-dark has-text-weight-bold is-small m-0" id="prompt">- <span class="is-underlined">Translate the following</span> -</h1>
+          <p class="label" id="prompt-material">Hallo! Ich bin Melanie!</p>
           <textarea class="textarea has-fixed-size" id="text-input" placeholder="Type your answer here."></textarea> <br />
           <button class="button is-success is-rounded is-outlined" id="confirm">
             <span>Confirm</span>
@@ -43,11 +42,11 @@
         </div>
       </div>
     </div>
-      <div class="columns is-centered">
-        <div class="column is-four-fifths is-narrow is-fixed-bottom">
-          <progress class="progress is-success mb-6" value="50" max="100"></progress>
-        </div>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths is-narrow is-fixed-bottom">
+        <progress class="progress is-success mb-6" value="50" max="100"></progress>
       </div>
+    </div>
   </section>
   <script type="module" src="../Javascript/task.mjs"></script>
 </html>
