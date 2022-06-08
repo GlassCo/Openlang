@@ -3,8 +3,8 @@ Open-source Duolingo Clone.
 
 ## Planned Features
   ###### User-Sourced Content
-- [ ] Custom Lessons
-- [ ] Custom Courses
+- [X] Custom Lessons
+- [X] Custom Courses
 
 ###### Customizability
 - [ ] Custom Themes + Easy Theme Creator
@@ -16,7 +16,7 @@ Open-source Duolingo Clone.
 - [ ] Speech to Text 
 
 ###### Tasks
-- [ ] Text Translation Tasks
+- [X] Text Translation Tasks
 - [ ] Audio Translation and Inscription Tasks
 - [ ] Image Description Tasks
 - [ ] Word Match Task
