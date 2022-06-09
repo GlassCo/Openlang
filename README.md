@@ -33,6 +33,6 @@ Open-source Duolingo Clone.
 - [CSS Filter Generator (Barett Sonntag)](https://codepen.io/sosuke/pen/Pjoqqp)
 
 ###### (Yet Unutilized)
-- [Bergamot Translator (Mozilla)](https://github.com/mozilla/bergamot-translator)
+- [Translate (Mozilla)]([https://github.com/mozilla/bergamot-translator](https://github.com/mozilla/translate))
 - [Deepspeech (Mozilla)](https://github.com/mozilla/DeepSpeech)
 - [TTS (Mozilla)](https://github.com/mozilla/TTS)
