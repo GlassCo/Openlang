@@ -1,11 +1,6 @@
 {
     "TITLE":"",
     "SETTINGS":{
-        "API":{
-            "TRANSLATOR":"",
-            "TTS":"",
-            "STT":""
-            },
         "LANG":{
             "NATIVE":"aa",
             "TARGET":"bb"
@@ -14,28 +9,14 @@
     "LESSONS":[
         {
             "TITLE":"",
-            "ICON":"",
             "CHECKPOINT":0,
             "LEVEL":0,
             "MEDIA":{
                 "NATIVESENTENCES":[
 
                 ],
-                "NATIVEAUDIO":[
-
-                ],
                 "TARGETSENTENCES":[
 
-                ],
-                "TARGETAUDIO":[
-
-                ],
-                "IMAGES":[
-                    {
-                        "PATH":"",
-                        "NATIVETEXT":"",
-                        "TARGETTEXT":""
-                    }
                 ]
             }
         }

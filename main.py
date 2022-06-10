@@ -26,4 +26,4 @@ def App():
 
 App()
 
-eel.start("HTML/index.html", size=(500, 600))
+eel.start("HTML/main.html", size=(500, 600))

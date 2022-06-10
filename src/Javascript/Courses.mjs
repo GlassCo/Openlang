@@ -1,4 +1,6 @@
 
+// Outdated JS File for Courses- Kept for Documentation
+
 class API {
     constructor(TRANSLATOR, TTS, STT) {
         this.TRANSLATOR = TRANSLATOR    // Preferred Translator API

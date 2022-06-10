@@ -1,0 +1,39 @@
+{
+    "TITLE":"Basic Deutsch",
+    "SETTINGS":{
+        "LANG":{
+            "NATIVE":"en",
+            "TARGET":"de"
+        }
+    },
+    "LESSONS":[
+        {
+            "TITLE":"Basics 1",
+            "CHECKPOINT":0,
+            "LEVEL":0,
+            "MEDIA":{
+                "NATIVESENTENCES":[
+                    "Hello! I'm Melanie!",
+                    "What is that?"
+                ],
+                "TARGETSENTENCES":[
+                    "Hallo! Ich bin Melanie!",
+                    "Was ist das?"
+                ]
+            }
+        },
+        {
+            "TITLE":"Directions",
+            "CHECKPOINT":1,
+            "LEVEL":0,
+            "MEDIA":{
+                "NATIVESENTENCES":[
+                    "Where am I?"
+                ],
+                "TARGETSENTENCES":[
+                    "Wer ist hier?"
+                ]
+            }
+        }
+    ]
+}

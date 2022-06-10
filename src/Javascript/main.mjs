@@ -24,6 +24,18 @@ function PreviousPage() {
   LoadCourses(PREVPAGE-2);
 }
 
+// Variable-Related Functions
+function StripString(INPUT) {
+  let RESULT = INPUT.toLowerCase();
+  RESULT = RESULT.replace(/[\/\\#,+()$~%.":*?<>{}@!^`_=;[\]\| ]/g, '');
+  RESULT = RESULT.replace(/\&/g, "and")
+  return RESULT
+}
+
+function RandomRange(MIN, MAX) {
+  return Math.floor(Math.random() * (MAX - MIN + 1) + MIN);
+}
+
   // Page-Builder Functions
 // Course Loading
 function LoadCourses(PAGE) {
@@ -51,7 +63,7 @@ function LoadCourses(PAGE) {
   }
 
   // Disable Prev/Next
-  if (PAGE === (Math.ceil((courseList.length / 10) - 1))) {
+  if (PAGE === Math.floor((courseList.length / 10))) {
     document.getElementById("next-page").disabled = true;
   } else {
     document.getElementById("next-page").disabled = false;
@@ -128,8 +140,69 @@ function LoadCourse(COURSENUM) {
 // Tasks
 function StartLesson(COURSENUM, LESSONNUMBER) {
   let COURSEMEDIA = courseData[COURSENUM].LESSONS[LESSONNUMBER].MEDIA;
-  //let LESSONLENGTH; = 10 // Tasks #
-  TranslationTask(COURSEMEDIA.NATIVESENTENCES[1], COURSEMEDIA.TARGETSENTENCES[1], false)
+  let LESSONLENGTH = 10; // Typically 17 Tasks on Duolingo?
+  let TASKSENTENCES = [];
+  let CURRENTTASK = 0;
+
+  // Generate Random Tasks
+  for (let i = 0; i <= LESSONLENGTH; i++) {
+    TASKSENTENCES[i] = RandomRange(0, (COURSEMEDIA.NATIVESENTENCES.length-1));
+  }
+
+  // Instantiate Next Button
+  document.getElementById("next-btn-area").innerHTML = `
+    <div class="buttons is-right">
+      <span class="icon is-medium mt-2 p-0">
+        <img src="../Icons/svg/arrow-right-thick.svg" id="next-icon" />
+      </span>
+    </div>
+  `
+
+  // Elements
+  let next = document.getElementById("next-icon");
+  let progressBar = document.getElementById("progress-bar");
+  let back = document.getElementById("back-icon");
+
+  // Filter Initialization
+  next.style.filter = filterGen.hexToStyle("#B5B5B5").filter;
+
+  // Add Event Listeners
+  next.addEventListener("click", function(){
+    // Post-Lesson Return
+    if (CURRENTTASK === -1) {
+      CoursePage(COURSENUM);
+    }
+
+    // Task-Based Responses
+    if ((CURRENTTASK+1) === LESSONLENGTH || CURRENTTASK === LESSONLENGTH) {   // Last Task
+      CURRENTTASK = -1;
+      progressBar.value = 100
+      let textBox = document.getElementById("text-input");
+      back.classList.add("is-hidden");
+      textBox.readOnly = true;
+      textBox.value = "LESSON COMPLETE! Please proceed to return to course.";
+    } else {  // Non-Last Tasks
+      CURRENTTASK += 1;
+      progressBar.value = (100 / LESSONLENGTH) * CURRENTTASK - 1
+      document.getElementById("next-btn-area").classList.add("is-hidden");
+      TranslationTask(COURSEMEDIA.NATIVESENTENCES[TASKSENTENCES[CURRENTTASK]], COURSEMEDIA.TARGETSENTENCES[TASKSENTENCES[CURRENTTASK]], RandomRange(0, 1));
+    }
+  });
+  next.addEventListener("mousedown", function(){
+    next.style.filter = filterGen.hexToStyle("#FFFFFF").filter;
+  });
+  next.addEventListener("mouseup", function(){
+    next.style.filter = filterGen.hexToStyle("#48C774").filter;
+  });
+  next.addEventListener("mouseover", function(){
+    next.style.filter = filterGen.hexToStyle("#48C774").filter;
+  });
+  next.addEventListener("mouseout", function(){
+    next.style.filter = filterGen.hexToStyle("#B5B5B5").filter;
+  });
+
+  // Initial Task
+  TranslationTask(COURSEMEDIA.NATIVESENTENCES[TASKSENTENCES[CURRENTTASK]], COURSEMEDIA.TARGETSENTENCES[TASKSENTENCES[CURRENTTASK]], RandomRange(0, 1));
 }
 
 function TranslationTask(NATIVESENTENCE, TARGETSENTENCE, BACKWARDS) {
@@ -144,36 +217,36 @@ function TranslationTask(NATIVESENTENCE, TARGETSENTENCE, BACKWARDS) {
         <img src="../Icons/svg/check.svg" id="check-mark" />
       </span>
     </button>
-    <article class="message mb-0 mx-0 mt-3 px-0 pt-0 is-small is-hidden" id="result-box">
-      <div class="message-header has-text-weight-bold" id="result-header">
-        Result: <span id="result"></span>
-      </div>
-      <div class="message-body has-background-white">
-        <span class="underlined">Answer:</span>
-        <div class="message is-small m-0">
-          <div class="message-body has-text-weight-bold">
-            <span id="answer"></span>
-          </div>
-        </div> <br />
+    <div class="is-hidden" id="result-box">
+      <article class="message mb-0 mx-0 mt-4 px-0 pt-0 is-small">
+        <div class="message-header has-text-weight-bold" id="result-header">
+          Result: <span id="result"></span>
+        </div>
+        <div class="message-body has-background-white">
+          <span class="underlined">Answer:</span>
+          <div class="message is-small m-0">
+            <div class="message-body has-text-weight-bold">
+              <span id="answer"></span>
+            </div>
+          </div> <br />
           [ Override Results ]
           <div class="buttons is-small has-addons is-centered has-addons-centered">
             <button class="button is-success is-inverted is-rounded is-small pr-1 m-0" id="correct-override">  Correct</button>
             <button class="button is-danger is-inverted is-rounded is-small pl-1 m-0" id="incorrect-override">Incorrect</button>
           </div>
         </div>
-        <span></span><br />
-      </div>
-    </article>
+      </article>
+    </div>
   `
 
   // Elements
-  let answerBox = document.getElementById("text-input")
-  let promptMaterial = document.getElementById("prompt-material")
-  let answer = document.getElementById("answer")
-  let confirm = document.getElementById("confirm")
-  let checkMark = document.getElementById("check-mark")
-  let correctOverride = document.getElementById("correct-override")
-  let incorrectOverride = document.getElementById("incorrect-override")
+  let answerBox = document.getElementById("text-input");
+  let promptMaterial = document.getElementById("prompt-material");
+  let answer = document.getElementById("answer");
+  let confirm = document.getElementById("confirm");
+  let checkMark = document.getElementById("check-mark");
+  let correctOverride = document.getElementById("correct-override");
+  let incorrectOverride = document.getElementById("incorrect-override");
 
   // Swap Goal
   if (BACKWARDS) {
@@ -205,23 +278,26 @@ function SubmitAnswer(ANSWER, CORRECTANSWER, OVERRIDE) {
   document.getElementById("answer").classList.remove("is-hidden");
 
   // Variables
-  let RESULT = ""
-  let resultDisplay = ""
-  let resultColor = ""
+  var RESULT;
+  var ANSWER = StripString(ANSWER)
+  var CORRECTANSWER = StripString(CORRECTANSWER)
+  let resultDisplay;
+  let resultColor;
 
   // Elements
   let checkMark = document.getElementById("check-mark");
   let textInput = document.getElementById("text-input");
   let confirm = document.getElementById("confirm");
-  var result = document.getElementById("result");
+  let result = document.getElementById("result");
   let resultHeader = document.getElementById("result-header");
   let resultBox = document.getElementById("result-box");
+  let nextButton = document.getElementById("next-btn-area");
 
   if (OVERRIDE === null || OVERRIDE === "") {
     if (ANSWER === CORRECTANSWER) {
-      RESULT = "correct"
+      RESULT = "correct";
     } else {
-      RESULT = "incorrect"
+      RESULT = "incorrect";
     }
   } else {
     RESULT = OVERRIDE
@@ -264,7 +340,7 @@ function SubmitAnswer(ANSWER, CORRECTANSWER, OVERRIDE) {
   checkMark.style.filter = filterGen.hexToStyle("#9FDEC2").filter;
 
   textInput.disabled = true;
-
+  nextButton.classList.remove("is-hidden");
   resultBox.classList.remove("is-hidden");
   confirm.disabled = true;
 }
@@ -280,13 +356,13 @@ function CourseSelectionPage() {
             <div class="box has-background-white my-4 py-2">
               <span id="courses"></span>
               <div class="buttons is-centered mt-3 mb-1" id="page-selection">
-                  <button class="button is-dark mr-6" id="prev-page"><</button> 
-                  <button class="button" disabled><span id="page-number"></span></button>
-                  <button class="button is-dark ml-6" id="next-page">></button>
+                <button class="button is-dark mr-6" id="prev-page"><</button> 
+                <button class="button" disabled><span id="page-number"></span></button>
+                <button class="button is-dark ml-6" id="next-page">></button>
               </div>
             </div>
             <div class="buttons is-right">
-              <button class="button is-small mt-3">
+              <button class="button is-small mt-3" disabled>
                 <span class="icon">
                   <img src="../Icons/svg/cog.svg" id="settings-icon" />
                 </span>
@@ -310,118 +386,93 @@ function CoursePage(COURSENUM) {
         <div class="column has-text-centered is-narrow is-vcentered">
           <div class="box has-background-light px-6 pt-6 pb-3">
             <h1 class="title has-text-dark">- <span class="is-underlined">${courseData[COURSENUM].TITLE}</span> -</h1>
-            <div class="box" id="course">
-
+            <div class="box mb-4" id="course">
             </div>
+            <span class="icon is-medium mt-0 mb-1">
+              <img src="../Icons/svg/arrow-left-thick.svg" id="back-icon" />
+            </span>
           </div>
         </div>
       </div>
     </section>
   `;
-  
+
+  // Elements
+  let back = document.getElementById("back-icon");
+
+  // Event Listeners
+  back.addEventListener("click", function(){
+    CourseSelectionPage(0);
+  });
+  back.addEventListener("mousedown", function(){
+    back.style.filter = filterGen.hexToStyle("#209CEE").filter;
+  });
+  back.addEventListener("mouseup", function(){
+    back.style.filter = filterGen.hexToStyle("#3273DC").filter;
+  });
+  back.addEventListener("mouseover", function(){
+    back.style.filter = filterGen.hexToStyle("#3273DC").filter;
+  });
+  back.addEventListener("mouseout", function(){
+    back.style.filter = filterGen.hexToStyle("#000000").filter;
+  });
+
   LoadCourse(COURSENUM);
 }
 
 function TaskPage(COURSENUM, LESSONNUMBER) {
   docBody.innerHTML = `
     <section class="hero is-dark is-fullheight is-clipped">
-    <div class="hero-body columns is-centered">
-      <div class="column has-text-centered is-two-thirds is-narrow is-vcentered">
-        <div class="box has-background-light px-5 py-5 m-0" id="taskbox">
+      <div class="hero-body columns m-0 p-0">
+        <div class="column is-full">
+          <div class="columns is-centered m-6 p-6">
+            <div class="column has-text-centered is-two-fifths is-narrow is-vcentered">
+              <div class="box has-background-light px-5 pt-5 pb-4 m-0">
+                <div id="taskbox"></div>
+                <div class="is-hidden" id="next-btn-area"></div>
+              </div>
+            </div>
+          </div>
+            <div class="columns is-centered">
+              <div class="column is-align-content-center m-0 p-0">
+                <div class="buttons is-right">
+                  <span class="icon is-medium mr-3 ml-0 mt-2 mb-0 p-0">
+                    <img src="../Icons/svg/arrow-left-thick.svg" id="back-icon" />
+                  </span>
+                </div>
+              </div>
+              <div class="column is-four-fifths m-0 p-0">
+                <progress class="progress is-success mx-0 my-4 p-0" value="0" max="100" id="progress-bar"></progress>
+              </div>
+              <div class="column m-0 p-0"></div>
+            </div>
         </div>
       </div>
-    </div>
-
-    <div class="columns is-centered">
-      <div class="column is-four-fifths is-narrow is-fixed-bottom">
-        <progress class="progress is-success mb-6" value="0" max="100"></progress>
-      </div>
-    </div>
     </section>
   `;
+
+  // Elements
+  let back = document.getElementById("back-icon");
+
+  // Filter Initialization
+  back.style.filter = filterGen.hexToStyle("#F5F5F5").filter
+
+  // Event Listeners
+  back.addEventListener("click", function(){
+    CoursePage(COURSENUM);
+  });
+  back.addEventListener("mousedown", function(){
+    back.style.filter = filterGen.hexToStyle("#FFFFFF").filter;
+  });
+  back.addEventListener("mouseup", function(){
+    back.style.filter = filterGen.hexToStyle("#48C774").filter;
+  });
+  back.addEventListener("mouseover", function(){
+    back.style.filter = filterGen.hexToStyle("#48C774").filter;
+  });
+  back.addEventListener("mouseout", function(){
+    back.style.filter = filterGen.hexToStyle("#F5F5F5").filter;
+  });
+
   StartLesson(COURSENUM, LESSONNUMBER);
 }
-
-/*
-// Elements
-var check = document.getElementById("check-mark");
-var textinput = document.getElementById("text-input");
-var confirm = document.getElementById("confirm");
-var result = document.getElementById("result");
-var resultheader = document.getElementById("result-header");
-var resultbox = document.getElementById("result-box");
-var correctoverride = document.getElementById("correct-override")
-var incorrectoverride = document.getElementById("incorrect-override")
-
-// Event Listeners
-correctoverride.addEventListener("click", ToggleCorrectOverride);
-incorrectoverride.addEventListener("click", ToggleIncorrectOverride);
-
-
-// Functions
-function Confirm() {
-    // get RESULT
-    let resultColor = ActResult("incorrect");
-
-    //let resultColor = "success";
-
-    if (resultColor === "success") {
-        correctoverride.disabled = true;
-        result.innerHTML = "Correct";
-    } else if (resultColor === "danger") {
-        incorrectoverride.disabled = true;
-        result.innerHTML = "Incorrect";
-    } else {
-        result.innerHTML = "Unknown";
-    }
-    
-    resultheader.classList.add(`has-background-${resultColor}`);
-    resultheader.classList.add(`has-background-${resultColor}`);
-    textinput.classList.add(`is-${resultColor}`);
-    
-    check.style.filter = filterGen.hexToStyle("#9FDEC2").filter;
-
-    textinput.disabled = true;
-
-    resultbox.classList.remove("is-hidden");
-    confirm.disabled = true;
-}
-
-function ActResult(RESULT) {
-    if (RESULT === "correct") {
-        let resultColor = "success";
-        return resultColor;
-    } else if (RESULT === "incorrect") {
-        let resultColor = "danger";
-        return resultColor;
-    } else {
-        let resultColor = "link";
-        return resultColor;
-    }
-}
-
-function ToggleCorrectOverride() {
-    incorrectoverride.classList.add("is-selected");
-}
-
-function ToggleIncorrectOverride() {
-    incorrectoverride.classList.add("is-selected");
-}
-
-function ButtonHover() {
-    CheckRecolor(true);
-}
-
-function ButtonUnhover() {
-    CheckRecolor(false);
-    confirm.blur();
-}
-
-function CheckRecolor(INVERT) {
-    if (INVERT) {
-        check.style.filter = filterGen.hexToStyle("#FFFFFF").filter;
-    } else {
-        check.style.filter = filterGen.hexToStyle("#48C774").filter;
-    }
-}
-*/
