@@ -1,5 +1,5 @@
 # Openlang
-Open-source Duolingo Clone.
+Open-source Duolingo clone designed to make studying languages easier by opening up Duolingo's way of teaching to the user, allowing the use of custom courses.
 
 ## Installation
 **Requirements:**
@@ -34,6 +34,7 @@ Step 2. Run the program: ```python main.py```
 ###### Quality of Life
 - [ ] Translation on Hover
 - [ ] Translator-based Answer Verification
+- [ ] Special Character Board Below Textbox
 
 ## Utilized Projects
 ###### (Implemented)
