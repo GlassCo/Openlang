@@ -1,8 +1,17 @@
 # Openlang
 Open-source Duolingo Clone.
 
+## Installation
+**Requirements:**
+- Python
+- Chromium (Default)
+
+**Installation:**  
+Step 1. Run the following command in your terminal: ```pip install eel```  
+Step 2. Run the program: ```python main.py```
+
 ## Planned Features
-  ###### User-Sourced Content
+###### User-Sourced Content
 - [X] Custom Lessons
 - [X] Custom Courses
 
