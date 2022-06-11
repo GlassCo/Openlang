@@ -2,11 +2,11 @@
 Open-source Duolingo clone designed to make studying languages easier by opening up Duolingo's way of teaching to the user, allowing the use of custom courses.
 
 ## Installation
-**Requirements:**
+###### Requirements
 - Python
 - Chromium (Default)
-
-**Installation:**  
+- 
+###### Installation Process
 Step 1. Run the following command in your terminal: ```pip install eel```  
 Step 2. Run the program: ```python main.py```
 
