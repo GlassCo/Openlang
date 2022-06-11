@@ -26,13 +26,13 @@ Open-source Duolingo Clone.
 - [ ] Translation on Hover
 - [ ] Translator-based Answer Verification
 
-## Utilized APIs and Algorithms
+## Utilized Projects
 ###### (Implemented)
 - [Eel (ChrisKnott)](https://github.com/ChrisKnott/Eel)
 - [Bulma (jghtms)](https://github.com/jgthms/bulma)
 - [CSS Filter Generator (Barett Sonntag)](https://codepen.io/sosuke/pen/Pjoqqp)
 
-###### (Yet Unutilized)
-- [Translate (Mozilla)]([https://github.com/mozilla/bergamot-translator](https://github.com/mozilla/translate))
+###### (Unutilized So Far)
+- [Bergamot Translator (Mozilla)](https://github.com/mozilla/bergamot-translator)
 - [Deepspeech (Mozilla)](https://github.com/mozilla/DeepSpeech)
 - [TTS (Mozilla)](https://github.com/mozilla/TTS)
