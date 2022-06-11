@@ -36,13 +36,15 @@ Step 2. Run the program: ```python main.py```
 - [ ] Translator-based Answer Verification
 - [ ] Special Character Board Below Textbox
 
-## Utilized Projects
-###### (Implemented)
+## Credits
+###### Utilized Projects
 - [Eel (ChrisKnott)](https://github.com/ChrisKnott/Eel)
 - [Bulma (jghtms)](https://github.com/jgthms/bulma)
 - [CSS Filter Generator (Barett Sonntag)](https://codepen.io/sosuke/pen/Pjoqqp)
 
-###### (Unutilized So Far)
-- [Bergamot Translator (Mozilla)](https://github.com/mozilla/bergamot-translator)
-- [Deepspeech (Mozilla)](https://github.com/mozilla/DeepSpeech)
-- [TTS (Mozilla)](https://github.com/mozilla/TTS)
+##### Developers
+- [RiverMoot](https://github.com/RiverMoot)
+
+## Notes
+###### Donation
+Wanna support the developer of this project? Buy me a coffee at https://ko-fi.com/rivermoot!
