@@ -42,7 +42,7 @@ Step 2. Run the program: ```python main.py```
 - [Bulma (jghtms)](https://github.com/jgthms/bulma)
 - [CSS Filter Generator (Barett Sonntag)](https://codepen.io/sosuke/pen/Pjoqqp)
 
-##### Developers
+###### Developers
 - [RiverMoot](https://github.com/RiverMoot)
 
 ## Notes
