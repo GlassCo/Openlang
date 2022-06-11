@@ -1,5 +1,8 @@
 # Openlang
-Open-source Duolingo clone designed to make studying languages easier by opening up Duolingo's way of teaching to the user, allowing the use of custom courses.
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X87YFY8)
+
+## What is Openlang?
+Openlang is an open-source Duolingo clone designed to make studying languages easier by opening up Duolingo's way of teaching to the user, allowing the use of custom courses.
 
 ## Installation
 ###### Requirements
@@ -44,7 +47,3 @@ Step 2. Run the program: ```python main.py```
 
 ###### Developers
 - [RiverMoot](https://github.com/RiverMoot)
-
-## Notes
-###### Donation
-Wanna support the developer of this project? Buy me a coffee at https://ko-fi.com/rivermoot!
