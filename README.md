@@ -17,6 +17,7 @@ Step 2. Run the program: ```python main.py```
 ###### User-Sourced Content
 - [X] Custom Lessons
 - [X] Custom Courses
+- [ ] Lesson Notes
 
 ###### Customizability
 - [ ] Custom Themes + Easy Theme Creator
