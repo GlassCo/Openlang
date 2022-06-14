@@ -35,6 +35,7 @@ Step 2. Run the program: ```python main.py```
 - [ ] Build-a-Sentence Task
 
 ###### Quality of Life
+- [ ] Crowns Counter
 - [ ] Translation on Hover
 - [ ] Translator-based Answer Verification
 - [ ] Special Character Board Below Textbox
