@@ -35,7 +35,6 @@ function StripString(INPUT) {
 function RandomRange(MIN, MAX) {
   return Math.floor(Math.random() * (MAX - MIN + 1) + MIN);
 }
-
   // Page-Builder Functions
 // Course Loading
 function LoadCourses(PAGE) {
@@ -160,8 +159,9 @@ function StartLesson(COURSENUM, LESSONNUMBER) {
 
   // Elements
   let next = document.getElementById("next-icon");
-  let progressBar = document.getElementById("progress-bar");
   let back = document.getElementById("back-icon");
+  let progressBar = document.getElementById("progress-bar");
+  let textInput = document.getElementById("text-input");
 
   // Filter Initialization
   next.style.filter = filterGen.hexToStyle("#B5B5B5").filter;
@@ -177,15 +177,13 @@ function StartLesson(COURSENUM, LESSONNUMBER) {
     if ((CURRENTTASK+1) === LESSONLENGTH || CURRENTTASK === LESSONLENGTH) {   // Last Task
       CURRENTTASK = -1;
       progressBar.value = 100
-      let textBox = document.getElementById("text-input");
       back.classList.add("is-hidden");
-      textBox.readOnly = true;
-      textBox.value = "LESSON COMPLETE! Please proceed to return to course.";
+      textInput.value = "LESSON COMPLETE! Please proceed to return to course.";
     } else {  // Non-Last Tasks
       CURRENTTASK += 1;
       progressBar.value = (100 / LESSONLENGTH) * CURRENTTASK - 1
       document.getElementById("next-btn-area").classList.add("is-hidden");
-      TranslationTask(COURSEMEDIA.NATIVESENTENCES[TASKSENTENCES[CURRENTTASK]], COURSEMEDIA.TARGETSENTENCES[TASKSENTENCES[CURRENTTASK]], RandomRange(0, 1));
+      TextTask(COURSEMEDIA.NATIVESENTENCES[TASKSENTENCES[CURRENTTASK]], COURSEMEDIA.TARGETSENTENCES[TASKSENTENCES[CURRENTTASK]], COURSENUM, RandomRange(0, 1));
     }
   });
   next.addEventListener("mousedown", function(){
@@ -202,14 +200,23 @@ function StartLesson(COURSENUM, LESSONNUMBER) {
   });
 
   // Initial Task
-  TranslationTask(COURSEMEDIA.NATIVESENTENCES[TASKSENTENCES[CURRENTTASK]], COURSEMEDIA.TARGETSENTENCES[TASKSENTENCES[CURRENTTASK]], RandomRange(0, 1));
+  TextTask(COURSEMEDIA.NATIVESENTENCES[TASKSENTENCES[CURRENTTASK]], COURSEMEDIA.TARGETSENTENCES[TASKSENTENCES[CURRENTTASK]], COURSENUM, RandomRange(0, 1));
 }
 
-function TranslationTask(NATIVESENTENCE, TARGETSENTENCE, BACKWARDS) {
-  // Backwards means Native to Target
+function TextTask(NATIVESENTENCE, TARGETSENTENCE, COURSENUM, BACKWARDS) {
+  // Variables
+  let translateTo;
+
+  // Backwards = Native to Target
+  if (BACKWARDS) {
+    translateTo = courseData[COURSENUM].SETTINGS.LANG.TARGETNAME;
+  } else {
+    translateTo = courseData[COURSENUM].SETTINGS.LANG.NATIVENAME;
+  }
+  
   document.getElementById("taskbox").innerHTML = `
-    <h1 class="subtitle has-text-dark has-text-weight-bold is-small m-0" id="prompt">- <span class="is-underlined">Translate the following</span> -</h1>
-    <p class="label" id="prompt-material"></p>
+    <h1 class="subtitle has-text-dark has-text-weight-bold is-small m-0" id="prompt">- <span class="is-underlined">Translate to ${translateTo}</span> -</h1>
+    <div class="label" id="prompt-material"></div>
     <textarea class="textarea has-fixed-size" id="text-input" placeholder="Type your answer here."></textarea> <br />
     <button class="button is-success is-rounded is-outlined" id="confirm">
       <span>Confirm</span>
@@ -253,10 +260,20 @@ function TranslationTask(NATIVESENTENCE, TARGETSENTENCE, BACKWARDS) {
     promptMaterial.innerText = NATIVESENTENCE
     answer.innerText = TARGETSENTENCE
     confirm.addEventListener("click", function(){SubmitAnswer(answerBox.value, TARGETSENTENCE, "")});
+    document.addEventListener("keypress", function(e){
+      if (answerBox === document.activeElement && e.key === "Enter") {
+        SubmitAnswer(answerBox.value, TARGETSENTENCE, "");
+      }
+    })
   } else {
     promptMaterial.innerText = TARGETSENTENCE
     answer.innerText = NATIVESENTENCE
     confirm.addEventListener("click", function(){SubmitAnswer(answerBox.value, NATIVESENTENCE, "")});
+    document.addEventListener("keypress", function(e){
+      if (answerBox === document.activeElement && e.key === "Enter") {
+        SubmitAnswer(answerBox.value, NATIVESENTENCE, "");
+      }
+    })
   }
 
   // Icon Defaults
@@ -285,14 +302,14 @@ function SubmitAnswer(ANSWER, CORRECTANSWER, OVERRIDE) {
   let resultColor;
 
   // Elements
-  let checkMark = document.getElementById("check-mark");
   let textInput = document.getElementById("text-input");
   let confirm = document.getElementById("confirm");
   let result = document.getElementById("result");
   let resultHeader = document.getElementById("result-header");
   let resultBox = document.getElementById("result-box");
-  let nextButton = document.getElementById("next-btn-area");
+  let next = document.getElementById("next-btn-area");
 
+  // Decide Answer
   if (OVERRIDE === null || OVERRIDE === "") {
     if (ANSWER === CORRECTANSWER) {
       RESULT = "correct";
@@ -300,16 +317,18 @@ function SubmitAnswer(ANSWER, CORRECTANSWER, OVERRIDE) {
       RESULT = "incorrect";
     }
   } else {
+    // Override Results
     RESULT = OVERRIDE
 
+    // Revert Old Result
     if (OVERRIDE = "correct") {
       // Remove Old Colors
       resultHeader.classList.remove("has-background-danger");
       textInput.classList.remove("is-danger");
     } else if (OVERRIDE = "incorrect") {
       // Remove Old Colors
-      textInput.classList.remove("is-success");
       resultHeader.classList.remove("has-background-success");
+      textInput.classList.remove("is-success");
     }
   }
 
@@ -332,16 +351,19 @@ function SubmitAnswer(ANSWER, CORRECTANSWER, OVERRIDE) {
     resultDisplay = resultDisplay + " (Overridden)"
   }
 
+  // Change Result Text
   result.innerText = resultDisplay
   
+  // Change Highlight Colors
   resultHeader.classList.add(`has-background-${resultColor}`);
   textInput.classList.add(`is-${resultColor}`);
-  
-  checkMark.style.filter = filterGen.hexToStyle("#9FDEC2").filter;
 
-  textInput.disabled = true;
-  nextButton.classList.remove("is-hidden");
+  // Unhide Elements
+  next.classList.remove("is-hidden");
   resultBox.classList.remove("is-hidden");
+
+  // Disable Answer Input
+  textInput.disabled = true;
   confirm.disabled = true;
 }
 
@@ -433,19 +455,19 @@ function TaskPage(COURSENUM, LESSONNUMBER) {
               </div>
             </div>
           </div>
-            <div class="columns is-centered">
-              <div class="column is-align-content-center m-0 p-0">
-                <div class="buttons is-right">
-                  <span class="icon is-medium mr-3 ml-0 mt-2 mb-0 p-0">
-                    <img src="../Icons/svg/arrow-left-thick.svg" id="back-icon" />
-                  </span>
-                </div>
+          <div class="columns is-centered">
+            <div class="column is-align-content-center m-0 p-0">
+              <div class="buttons is-right">
+                <span class="icon is-medium mr-3 ml-0 mt-2 mb-0 p-0">
+                  <img src="../Icons/svg/arrow-left-thick.svg" id="back-icon" />
+                </span>
               </div>
-              <div class="column is-four-fifths m-0 p-0">
-                <progress class="progress is-success mx-0 my-4 p-0" value="0" max="100" id="progress-bar"></progress>
-              </div>
-              <div class="column m-0 p-0"></div>
             </div>
+            <div class="column is-four-fifths m-0 p-0">
+              <progress class="progress is-success mx-0 my-4 p-0" value="0" max="100" id="progress-bar"></progress>
+            </div>
+            <div class="column m-0 p-0"></div>
+          </div>
         </div>
       </div>
     </section>

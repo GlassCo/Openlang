@@ -10,9 +10,11 @@ class API {
 }
 
 class lang {
-    constructor(NATIVE, TARGET) {
+    constructor(NATIVE, TARGET, NATIVENAME, TARGETNAME) {
         this.NATIVE = NATIVE    // Two-letter Abbreviation for the Native Language
         this.TARGET = TARGET    // Two-letter Abbreviation for the Target Language
+        this.NATIVENAME = NATIVENAME    // Two-letter Abbreviation for the Native Language
+        this.TARGETNAME = TARGETNAME    // Two-letter Abbreviation for the Target Language
     }
 }
 
@@ -31,8 +33,17 @@ class image {
     }
 }
 
+class mediasettings {
+    constructor(TEXTTASK, AUDIOTASK, AUDIOTYPE) {
+        this.TEXTTASK = TEXTTASK        // Text Task Status
+        this.AUDIOTASK = AUDIOTASK      // Audio Task Status
+        this.AUDIOTYPE = AUDIOTYPE      // String of Audio Type (custom/tts/none)
+    }
+}
+
 class media {
-    constructor(NATIVESENTENCES, NATIVEAUDIO, TARGETSENTENCES, TARGETAUDIO, IMAGES) {
+    constructor(MEDIASETTINGS, NATIVESENTENCES, NATIVEAUDIO, TARGETSENTENCES, TARGETAUDIO, IMAGES) {
+        this.MEDIASETTINGS = MEDIASETTINGS
         this.NATIVESENTENCES = NATIVESENTENCES  // List of Native Sentences
         this.NATIVEAUDIO = NATIVEAUDIO          // List of Audio File Paths
         this.TARGETSENTENCES = TARGETSENTENCES  // List of Target Sentences
@@ -59,4 +70,4 @@ class course {
     }
 }
 
-export { API, lang, settings, image, media, lesson, course }
+export { API, lang, settings, image, mediasettings, media, lesson, course }

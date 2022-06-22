@@ -2,8 +2,10 @@
     "TITLE":"",
     "SETTINGS":{
         "LANG":{
-            "NATIVE":"aa",
-            "TARGET":"bb"
+            "NATIVE":"",
+            "TARGET":"",
+            "NATIVENAME":"",
+            "TARGETNAME":""
         }
     },
     "LESSONS":[
@@ -12,8 +14,13 @@
             "CHECKPOINT":0,
             "LEVEL":0,
             "MEDIA":{
+                "MEDIASETTINGS":{
+                    "TEXTTASKS":true,
+                    "AUDIOTASKS":true,
+                    "AUDIOTYPE":"custom/tts/none"
+                },
                 "NATIVESENTENCES":[
-
+                    
                 ],
                 "TARGETSENTENCES":[
 

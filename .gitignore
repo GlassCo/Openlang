@@ -1,2 +1,7 @@
-# Don't track content of these folders
+# Folders
 ignore/
+src/Dev/
+src/Icons/svg/ignore/
+
+# Files
+dev.py

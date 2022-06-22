@@ -5,7 +5,7 @@
    width="24"
    height="24"
    viewBox="0 0 24 24"
-   sodipodi:docname="tortoise.svg"
+   sodipodi:docname="tortoise-outline.svg"
    inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -33,6 +33,8 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="mdi-tortoise" />
   <path
-     d="M19.31,5.6C18.09,5.56 16.88,6.5 16.5,8C16,10 16,10 15,11C13,13 10,14 4,15C3,15.16 2.5,15.5 2,16C4,16 6,16 4.5,17.5L3,19H6L8,17C10,18 11.33,18 13.33,17L14,19H17L16,16C16,16 17,12 18,11C19,10 19,11 20,11C21,11 22,10 22,8.5C22,8 22,7 20.5,6C20.15,5.76 19.74,5.62 19.31,5.6M9,6A6,6 0 0,0 3,12C3,12.6 3.13,13.08 3.23,13.6C9.15,12.62 12.29,11.59 13.93,9.94L14.43,9.44C13.44,7.34 11.32,6 9,6Z"
-     id="path4367" />
+     d="M 19.31,5.6 C 18.09,5.56 16.88,6.5 16.5,8 16,10 16,10 15,11 L 14.43,9.44 C 13.44,7.34 11.32,6 9,6 5.6862915,6 3,8.6862915 3,12 c 0,0.6 0.13,1.08 0.23,1.6 0,0 0.2623986,1.08617 0.4104904,1.175678 C 3.8683933,14.913425 4,15 4,15 c -1,0.16 -1.5,0.5 -2,1 2,0 4,0 2.5,1.5 L 3,19 h 3 l 2,-2 c 2,1 3.33,1 5.33,0 L 14,19 h 3 l -1,-3 c 0,0 1,-4 2,-5 1,-1 1,0 2,0 1,0 2,-1 2,-2.5 C 22,8 22,7 20.5,6 20.15,5.76 19.74,5.62 19.31,5.6"
+     id="path4367"
+     style="fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+     sodipodi:nodetypes="ccccsscsccscccccccssscc" />
 </svg>

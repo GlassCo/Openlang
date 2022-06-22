@@ -3,7 +3,9 @@
     "SETTINGS":{
         "LANG":{
             "NATIVE":"en",
-            "TARGET":"de"
+            "TARGET":"de",
+            "NATIVENAME":"English",
+            "TARGETNAME":"German"
         }
     },
     "LESSONS":[
@@ -12,6 +14,11 @@
             "CHECKPOINT":0,
             "LEVEL":0,
             "MEDIA":{
+                "SETTINGS":{
+                    "TEXTTASKS":true,
+                    "AUDIOTASKS":true,
+                    "AUDIOTYPE":"custom/tts/none"
+                },
                 "NATIVESENTENCES":[
                     "Hello! I'm Melanie!",
                     "What is that?"
@@ -27,6 +34,11 @@
             "CHECKPOINT":1,
             "LEVEL":0,
             "MEDIA":{
+                "MEDIASETTINGS":{
+                    "TEXTTASKS":true,
+                    "AUDIOTASKS":true,
+                    "AUDIOTYPE":"custom/tts/none"
+                },
                 "NATIVESENTENCES":[
                     "Where am I?"
                 ],

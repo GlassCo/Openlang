@@ -1,0 +1,64 @@
+/* Progress Bars */
+$step: 1;
+$loops: round(100 / $step);
+$increment: 360 / $loops;
+$half: round($loops / 2);
+$backColor: #fafafa;
+
+.progress-circle {
+  position: relative;
+  float: left;
+  width: 50px;
+  height: 50px;
+  border: 2px solid $backColor;
+  border-radius: 50%;
+
+  @each $name, $pair in $colors {
+    $color: nth($pair, 1);
+    &.is-#{$name} {
+      background-color: $color;
+      @for $i from 0 through $loops {
+        &.is-#{$i * $step} {
+          @if $i < $half {
+            $nextDeg: 90deg + ($increment * $i);
+            background-image: linear-gradient(
+                90deg,
+                #ccc 50%,
+                transparent 50%,
+                transparent
+              ),
+              linear-gradient($nextDeg, $color 50%, #ccc 50%, #ccc);
+          } @else {
+            $nextDeg: -90deg + ($increment * ($i - $half));
+            background-image: linear-gradient(
+                $nextDeg,
+                $color 50%,
+                transparent 50%,
+                transparent
+              ),
+              linear-gradient(270deg, $color 50%, #ccc 50%, #ccc);
+          }
+        }
+        &[value="#{$i}"] {
+          @extend .is-#{$i};
+        }
+      }
+    }
+  }
+}
+
+.progress-inner {
+  position: absolute;
+  margin-left: 15%;
+  margin-top: 15%;
+  font-size: 10px;
+  font-weight: bold;
+  width: 70%;
+  height: 70%;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
