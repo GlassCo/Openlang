@@ -6,7 +6,18 @@
             "TARGET":"de",
             "NATIVENAME":"English",
             "TARGETNAME":"German"
-        }
+        },
+		"SUBSTITUTIONS":{
+			"NATIVE":[
+				["i'm", "i am"],
+				["they're", "they are"],
+				["he's", "he is"],
+				["she's", "she is"],
+				["what's", "what is"]
+			],
+			"TARGET":[
+			]
+		}
     },
     "LESSONS":[
         {

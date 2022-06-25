@@ -257,23 +257,9 @@ function TextTask(NATIVESENTENCE, TARGETSENTENCE, COURSENUM, BACKWARDS) {
 
   // Swap Goal
   if (BACKWARDS) {
-    promptMaterial.innerText = NATIVESENTENCE
-    answer.innerText = TARGETSENTENCE
-    confirm.addEventListener("click", function(){SubmitAnswer(answerBox.value, TARGETSENTENCE, "")});
-    document.addEventListener("keypress", function(e){
-      if (answerBox === document.activeElement && e.key === "Enter") {
-        SubmitAnswer(answerBox.value, TARGETSENTENCE, "");
-      }
-    })
+	CreateGoal(NATIVESENTENCE, TARGETSENTENCE, COURSENUM);
   } else {
-    promptMaterial.innerText = TARGETSENTENCE
-    answer.innerText = NATIVESENTENCE
-    confirm.addEventListener("click", function(){SubmitAnswer(answerBox.value, NATIVESENTENCE, "")});
-    document.addEventListener("keypress", function(e){
-      if (answerBox === document.activeElement && e.key === "Enter") {
-        SubmitAnswer(answerBox.value, NATIVESENTENCE, "");
-      }
-    })
+    CreateGoal(TARGETSENTENCE, NATIVESENTENCE, COURSENUM);
   }
 
   // Icon Defaults
@@ -287,17 +273,56 @@ function TextTask(NATIVESENTENCE, TARGETSENTENCE, COURSENUM, BACKWARDS) {
     checkMark.style.filter = filterGen.hexToStyle("#48C774").filter;
     confirm.blur();
   });
-  correctOverride.addEventListener("click", function(){SubmitAnswer("", "", "correct")});
-  incorrectOverride.addEventListener("click", function(){SubmitAnswer("", "", "incorrect")});
+  correctOverride.addEventListener("click", function(){SubmitAnswer("", "", "correct", COURSENUM, BACKWARDS)});
+  incorrectOverride.addEventListener("click", function(){SubmitAnswer("", "", "incorrect", COURSENUM, BACKWARDS)});
 }
 
-function SubmitAnswer(ANSWER, CORRECTANSWER, OVERRIDE) {
+function CreateGoal(PROMPT, ANSWER, COURSENUM, BACKWARDS) {
+	let answerBox = document.getElementById("text-input");
+	let promptMaterial = document.getElementById("prompt-material");
+	let answer = document.getElementById("answer");
+	let confirm = document.getElementById("confirm");
+	promptMaterial.innerText = PROMPT;
+    answer.innerText = ANSWER;
+    confirm.addEventListener("click", function(){SubmitAnswer(answerBox.value, ANSWER, "", COURSENUM, BACKWARDS)});
+    document.addEventListener("keypress", function(e){
+      if (answerBox === document.activeElement && e.key === "Enter") {
+        SubmitAnswer(answerBox.value, ANSWER, "", COURSENUM, BACKWARDS);
+      }
+    });
+}
+
+function CompareAnswer(ANSWER, CORRECTANSWER, COURSENUM, BACKWARDS) {
+	let normalisedAnswer = ANSWER;
+	let normalisedCorrectAnswer = CORRECTANSWER;
+	// Get the substitution lists from the course JSON
+	let substituteSets;
+	if (BACKWARDS) {
+		substituteSets = courseData[COURSENUM].SETTINGS.SUBSTITUTIONS.TARGET;
+	} else {
+		substituteSets = courseData[COURSENUM].SETTINGS.SUBSTITUTIONS.NATIVE;
+	}
+	let regexp = new RegExp();
+	for (var setID = 0; setID < substituteSets.length; setID++) {
+		let set = substituteSets[setID];
+		for (var substituteID = 1; substituteID < set.length; substituteID++) {
+			// Match only individual words/phrases to avoid false catches
+			regexp.compile("\\b" + set[substituteID] + "\\b", "gi");
+			normalisedAnswer = normalisedAnswer.replaceAll(regexp, set[0]);
+			normalisedCorrectAnswer = normalisedCorrectAnswer.replaceAll(regexp, set[0]);
+		}
+	}
+	// Strip and clean string to avoid false negatives (double spaces, capitalisation)
+	normalisedAnswer = StripString(normalisedAnswer);
+	normalisedCorrectAnswer = StripString(normalisedCorrectAnswer);
+	return normalisedAnswer === normalisedCorrectAnswer;
+}
+
+function SubmitAnswer(ANSWER, CORRECTANSWER, OVERRIDE, COURSENUM, BACKWARDS) {
   document.getElementById("answer").classList.remove("is-hidden");
 
   // Variables
   var RESULT;
-  var ANSWER = StripString(ANSWER)
-  var CORRECTANSWER = StripString(CORRECTANSWER)
   let resultDisplay;
   let resultColor;
 
@@ -311,7 +336,7 @@ function SubmitAnswer(ANSWER, CORRECTANSWER, OVERRIDE) {
 
   // Decide Answer
   if (OVERRIDE === null || OVERRIDE === "") {
-    if (ANSWER === CORRECTANSWER) {
+    if (CompareAnswer(ANSWER, CORRECTANSWER, COURSENUM, BACKWARDS)) {
       RESULT = "correct";
     } else {
       RESULT = "incorrect";
