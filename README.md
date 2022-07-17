@@ -7,11 +7,11 @@ Openlang is an open-source Duolingo clone designed to make studying languages ea
 ## Installation
 ###### Requirements
 - Python
-- Chromium (Default)
+- Web Browser (Chromium/Chrome by Default)
 
 ###### Installation Process
-Step 1. Run the following command in your terminal: ```pip install eel```  
-Step 2. Run the program: ```python main.py```
+Step 1. Unzip the repository.  
+Step 2. Run either ``Openlang.bat`` if you're on Windows, or ``Openlang.sh`` if you're running Linux. (Alternatively you may just run main.py, although you will need to install eel with the command ``pip install eel`` in your terminal.)
 
 ## Planned Features
 ###### User-Sourced Content
