@@ -46,6 +46,3 @@ Step 2. Run the program: ```python main.py```
 - [Eel (ChrisKnott)](https://github.com/ChrisKnott/Eel)
 - [Bulma (jghtms)](https://github.com/jgthms/bulma)
 - [CSS Filter Generator (Barett Sonntag)](https://codepen.io/sosuke/pen/Pjoqqp)
-
-###### Developers
-- [RiverMoot](https://github.com/RiverMoot)
