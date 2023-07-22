@@ -1,6 +1,8 @@
-import * as filterGen from "./filtergenerator.mjs"
-import courseList from "../Cache/courselist.json" assert {type: "json"};
-import courseData from "../Cache/courses.json" assert {type: "json"}
+import * as filterGen from "./filtergenerator.mjs";
+import courses from "../Cache/courses.json" assert {type: "json"};
+let courseList = courses[0];
+let courseData = courses;
+
 
   // Document-Related
 // Title
@@ -86,7 +88,7 @@ function LoadCourses(PAGE) {
 }
 
 function LoadCourse(COURSENUM) {
-  let COURSE = courseData[COURSENUM]
+  let COURSE = courseData[COURSENUM+1]
   let CHECKPOINTS = COURSE.LESSONS[COURSE.LESSONS.length-1].CHECKPOINT  // Find Number of Checkpoints (Lessons Ordered Lowest to Highest)
 
   for (let i = 0; i <= CHECKPOINTS; i++) {    // Per Checkpoint
@@ -138,7 +140,7 @@ function LoadCourse(COURSENUM) {
 
 // Tasks
 function StartLesson(COURSENUM, LESSONNUMBER) {
-  let COURSEMEDIA = courseData[COURSENUM].LESSONS[LESSONNUMBER].MEDIA;
+  let COURSEMEDIA = courseData[COURSENUM+1].LESSONS[LESSONNUMBER].MEDIA;
   let LESSONLENGTH = 10; // Typically 17 Tasks on Duolingo?
   let TASKSENTENCES = [];
   let CURRENTTASK = 0;
@@ -209,9 +211,9 @@ function TextTask(NATIVESENTENCE, TARGETSENTENCE, COURSENUM, BACKWARDS) {
 
   // Backwards = Native to Target
   if (BACKWARDS) {
-    translateTo = courseData[COURSENUM].SETTINGS.LANG.TARGETNAME;
+    translateTo = courseData[COURSENUM+1].SETTINGS.LANG.TARGETNAME;
   } else {
-    translateTo = courseData[COURSENUM].SETTINGS.LANG.NATIVENAME;
+    translateTo = courseData[COURSENUM+1].SETTINGS.LANG.NATIVENAME;
   }
   
   document.getElementById("taskbox").innerHTML = `
@@ -298,9 +300,9 @@ function CompareAnswer(ANSWER, CORRECTANSWER, COURSENUM, BACKWARDS) {
 	// Get the substitution lists from the course JSON
 	let substituteSets;
 	if (BACKWARDS) {
-		substituteSets = courseData[COURSENUM].SETTINGS.SUBSTITUTIONS.TARGET;
+		substituteSets = courseData[COURSENUM+1].SETTINGS.SUBSTITUTIONS.TARGET;
 	} else {
-		substituteSets = courseData[COURSENUM].SETTINGS.SUBSTITUTIONS.NATIVE;
+		substituteSets = courseData[COURSENUM+1].SETTINGS.SUBSTITUTIONS.NATIVE;
 	}
 	let regexp = new RegExp();
 	for (var setID = 0; setID < substituteSets.length; setID++) {
@@ -409,7 +411,7 @@ function CourseSelectionPage() {
               </div>
             </div>
             <div class="buttons is-right">
-              <button class="button is-small mt-3" disabled>
+              <button class="button is-small mt-3" id="settings">
                 <span class="icon">
                   <img src="../Icons/svg/cog.svg" id="settings-icon" />
                 </span>
@@ -420,7 +422,9 @@ function CourseSelectionPage() {
       </div>
     </section>
   `;
-
+  document.getElementById("settings").addEventListener("click", function(){
+    window.location.assign("settings.html");
+  });
   document.getElementById("next-page").addEventListener("click", NextPage);
   document.getElementById("prev-page").addEventListener("click", PreviousPage);
   LoadCourses(0)
@@ -432,7 +436,7 @@ function CoursePage(COURSENUM) {
       <div class="hero-body columns is-centered">
         <div class="column has-text-centered is-narrow is-vcentered">
           <div class="box has-background-light px-6 pt-6 pb-3">
-            <h1 class="title has-text-dark">- <span class="is-underlined">${courseData[COURSENUM].TITLE}</span> -</h1>
+            <h1 class="title has-text-dark">- <span class="is-underlined">${courseData[COURSENUM+1].TITLE}</span> -</h1>
             <div class="box mb-4" id="course">
             </div>
             <span class="icon is-medium mt-0 mb-1">

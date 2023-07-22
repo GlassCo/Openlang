@@ -1,5 +1,6 @@
 # Folders
 ignore/
+venv/
 src/Dev/
 src/Icons/svg/ignore/
 

@@ -6,7 +6,15 @@
             "TARGET":"",
             "NATIVENAME":"",
             "TARGETNAME":""
-        }
+        },
+        "SUBSTITUTIONS":{
+			"NATIVE":[
+				["shortening", "long version"]
+			],
+			"TARGET":[
+                ["shortening", "long version"]
+			]
+		}
     },
     "LESSONS":[
         {

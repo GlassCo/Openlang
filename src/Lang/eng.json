@@ -1,0 +1,36 @@
+{
+    "NAME":"English",
+    "LANG":"EN",
+    "TRANSLATIONS":{
+        "TITLES":{
+            "COURSES":"Courses",
+            "SETTINGS":"Settings"
+        },
+        "PROMPTS":{
+            "TRANSLATE":"Translate to ???",
+            "BOX":"Type your answer here."
+        },
+        "BUTTONS":{
+            "CHECKPOINT":"Checkpoint",
+            "PLAY":"Play",
+            "CONFIRM":"Confirm"
+        },
+        "SETTINGS":{
+            "PREFERENCES":{
+                "TITLE":"Preferences",
+                "THEME":"Theme",
+                "LANGUAGE":"Language"
+            },
+            "ACCESSIBILITY":{
+                "TITLE":"Accessibility",
+                "DYSLEXIA":[
+                    {
+                        "TITLE":"Dyslexia",
+                        "OPENDYSLEXIC":"OpenDyslexic Font",
+                        "BIONICREADING":"Bionic Reading"
+                    }
+                ]
+            }
+        }
+    }
+}

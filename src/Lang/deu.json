@@ -1,0 +1,36 @@
+{
+    "NAME":"Deutsch",
+    "LANG":"DE",
+    "TRANSLATIONS":{
+        "TITLES":{
+            "COURSES":"Kurse",
+            "SETTINGS":"Einstellungen"
+        },
+        "PROMPTS":{
+            "TRANSLATE":"Ins ??? übersetzen",
+            "BOX":"Geben Sie hier Ihre Antwort ein."
+        },
+        "BUTTONS":{
+            "CHECKPOINT":"Kontrollpunkt",
+            "PLAY":"Abspiel",
+            "CONFIRM":"Bestätigen"
+        },
+        "SETTINGS":{
+            "PREFERENCES":{
+                "TITLE":"Vorlieben",
+                "THEME":"Thema",
+                "LANGUAGE":"Sprache"
+            },
+            "ACCESSIBILITY":{
+                "TITLE":"Barrierefreiheit",
+                "DYSLEXIA":[
+                    {
+                        "TITLE":"Dyslexie",
+                        "OPENDYSLEXIC":"OpenDyslexic Schriftart",
+                        "BIONICREADING":"Bionisches Lesen"
+                    }
+                ]
+            }
+        }
+    }
+}

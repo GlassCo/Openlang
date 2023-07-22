@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head id="doc-head">
+    <title id="doc-title"></title>
+    <link rel="stylesheet" href="../CSS/bulma.css">
+    <link rel="stylesheet" href="../CSS/bulma-divider.css">
+  </head>
+  <section id="doc-body">
+    <section class="hero is-dark is-fullheight is-clipped">
+        <div class="hero-body columns is-centered">
+          <div class="column has-text-centered is-two-thirds is-vcentered">
+            <div class="box has-background-light px-6 pt-6 pb-5">
+              <h1 class="title has-text-dark">- <span class="is-underlined">Settings</span> -</h1>
+              <div class="columns is-centered">
+                <div class="column has-text-centered is-vcentered">
+                    <span class="has-text-weight-bold has-text-dark">- <span class="is-underlined">Preferences</span> -</span> <br />
+                    <div class="columns">
+                        <div class="column is-vcentered">
+                            Theme <br />
+                            <div class="select is-small">
+                                <select>
+                                    <option>EXAMPLE</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="column is-vcentered">
+                            Language <br />
+                            <div class="select is-small">
+                                <select id="languages">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column has-text-centered is-vcentered">
+                    <span class="has-text-weight-bold has-text-dark">- <span class="is-underlined">Accessibility</span> -</span> <br />
+                    <div class="columns">
+                        <div class="column">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                OpenDyslexic
+                            </label> <br />
+                        </div>
+                        <div class="column">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                Bionic Reading 
+                            </label>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <div class="buttons is-left">
+                    <span class="icon is-medium mr-3 ml-0 mt-2 mb-0 p-0">
+                      <img src="../Icons/svg/arrow-left-thick.svg" id="back-icon" />
+                    </span>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="buttons is-right">
+                    <button class="button is-link is-outlined mx-0 p-0" id="apply">
+                      <div class="ml-3">Apply (Restart)</div>
+                      <span class="icon is-medium mr-2">
+                        <img src="../Icons/svg/restart.svg" id="apply-icon" />
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  </section>
+  <script type="module" src="../Javascript/settings.mjs"></script>  
+</html>
